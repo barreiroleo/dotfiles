@@ -1,0 +1,43 @@
+[credential]
+    helper = store
+[init]
+    defaultBranch = master
+[core]
+    editor = nvim
+[fetch]
+    prune = true
+[pull]
+    # git config --global pull.ff only # Disallows non ff merges on pull. Overrides merge.ff when pulling
+    ff = true
+    # git config --global pull.rebase true # set up pull to rebase instead of merge
+    # rebase = true
+[diff]
+    tool = nvimdiff
+    guitool = nvimdiff
+[merge]
+    # Create extra merge commit when fast forward merge would be possible
+    ff = false
+    tool = nvimdiff_4way
+    # Show base code in $MERGED
+    conflictstyle = diff3
+[difftool]
+    prompt = true
+[mergetool]
+    prompt = true
+[difftool "nvimdiff"]
+    cmd = "nvim -d $LOCAL $REMOTE -c 'nnoremap ZZ :wqall<CR>' -c 'nnoremap ZQ :quitall<CR>'"
+[mergetool "nvimdiff_2way"]
+    cmd = "nvim -d $LOCAL $REMOTE -c 'nnoremap ZZ :wqall<CR>' -c 'nnoremap ZQ :quitall<CR>'"
+[mergetool "nvimdiff_3way"]
+    cmd = "nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J' -c 'nnoremap ZZ :wqall<CR>' -c 'nnoremap ZQ :quitall<CR>'"
+[mergetool "nvimdiff_4way"]
+    # Same as native git nvimdiff but with sortcuts
+    cmd = "nvim -d $LOCAL $BASE $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J' -c 'nnoremap ZZ :wqall<CR>' -c 'nnoremap ZQ :quitall<CR>'"
+
+[format]
+    pretty = %C(bold cyan)%h %C(no-bold white)%s %C(auto)%d %C("#505050")(%an %cr)
+[alias]
+    st  = status -sb
+    lg  = log --graph --decorate --all
+    lgf = log --graph --decorate --all --stat
+    lgfr = log --graph --decorate --all --name-status

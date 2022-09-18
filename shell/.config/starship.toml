@@ -1,0 +1,24 @@
+# ~/.config/starship.toml
+
+[directory]
+read_only = " "
+style = "bright-blue"
+# truncation_length = 2
+truncate_to_repo = false
+
+[git_branch]
+style = "green"
+# always_show_remote = true
+
+[git_status]
+style = "yellow"
+conflicted = "=${count}"
+ahead      = "⇡${count}"
+behind     = "⇣${count}"
+diverged   = "⇡${ahead_count}⇣${behind_count}"
+untracked  = "?${count}"
+stashed    = "S${count}"
+modified   = "!${count}"
+staged     = "+${count}"
+renamed    = "»${count}"
+deleted    = "✘${count}"

@@ -1,0 +1,21 @@
+font:
+  normal:
+    family: UbuntuMono Nerd Font
+    style: Regular
+
+  bold:
+    family: UbuntuMono Nerd Font
+    style: Bold
+
+  italic:
+    family: UbuntuMono Nerd Font
+    style: Italic
+
+  bold_italic:
+    family: UbuntuMono Nerd Font
+    style: Bold Italic
+
+  size: 11
+
+import:
+  - ~/develop/tools/gruvbox/Alacritty/gruvbox_dark.yaml

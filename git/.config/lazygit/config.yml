@@ -1,0 +1,13 @@
+gui:
+  showIcons:  true
+
+  paging:
+    colorArg: always
+    useConfig: true
+
+customCommands:
+  - key: '<c-d>'
+    command: "git difftool {{.SelectedFile.Name}}"
+    context: 'global'
+    subprocess: true
+    description: 'difftool over file'
