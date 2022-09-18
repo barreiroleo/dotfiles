@@ -1,0 +1,15 @@
+[submodule "private"]
+	path = private
+    url = git@github.com:barreiroleo/dotfiles-private.git
+
+[submodule "vim/.config/nvim"]
+    path = vim/.config/nvim
+    url = git@github.com:barreiroleo/nvim-config.git
+
+[submodule "conky/.config/conky"]
+    path = conky/.config/conky
+    url = git@github.com:barreiroleo/conky-config.git
+
+[submodule "tmux/.config/tmux"]
+    path = tmux/.config/tmux
+    url = git@github.com:barreiroleo/tmux-config.git
