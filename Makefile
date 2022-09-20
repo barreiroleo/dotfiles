@@ -15,15 +15,12 @@ delete:
 .PHONY: develop terminal git ssh ide docker fonts
 develop: terminal git ssh ide docker hosts fonts
 terminal:
+	sh terminal.sh
 	stow --verbose --target=$$HOME --restow kitty shell tmux
-	sudo pacman -S kitty zsh zsh-completions starship tmux lsd bat
-	sudo pacman -S zsh-syntax-highlighting zsh-autosuggestions
-	chsh -s /bin/zsh
-	sh -c "$$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 git: ssh
 	cd private && stow --verbose --target=$$HOME --restow git
 ssh:
-	cd private && stow --verbose --target=$$HOME --restow ssh
+	[ ! -d ~/.ssh ] && cd private && stow --verbose --target=$$HOME --restow ssh; true
 ide:
 	stow --verbose --target=$$HOME --restow vim
 docker: hosts
@@ -31,10 +28,7 @@ docker: hosts
 hosts:
 	cd z_root && stow --verbose --target=$$HOME --restow hosts
 fonts:
-	sudo pacman -S noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra
-	wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/UbuntuMono.zip
-	unzip -d UbuntuMono UbuntuMono.zip && mv UbuntuMono/ ~/.local/share/fonts/ && rm Ubuntu*.zip
-	fc-cache -fv
+	sh fonts.sh
 	
 .PHONY: desktop gnome conky ulauncher
 desktop: gnome conky ulauncher
