@@ -29,7 +29,14 @@ hosts:
 	cd z_root && stow --verbose --target=$$HOME --restow hosts
 fonts:
 	sh fonts.sh
-	
+
+.PHONY: develop-apps nvim platformio
+develop-apps: nvim platformio
+nvim:
+	sudo pacman -S neovim
+platformio:
+	sh platformio.sh
+
 .PHONY: desktop gnome conky ulauncher
 desktop: gnome conky ulauncher
 gnome:
