@@ -1,5 +1,7 @@
-.PHONY: default
-default: develop desktop
+.PHONY: default stow
+default: stow develop desktop
+stow:
+	! pacman --query stow && sudo pacman -S stow; true
 
 .PHONY: all delete
 all:
@@ -22,7 +24,11 @@ git: ssh
 ssh:
 	[ ! -d ~/.ssh ] && cd private && stow --verbose --target=$$HOME --restow ssh; true
 ide:
+	! pacman --query neovim && sudo pacman -S neovim; true
+	! pacman --query xclip	&& sudo pacman -S xclip wl-clipboard; true
 	stow --verbose --target=$$HOME --restow vim
+	[ ! -d ~/.local/share/nvim/mason ] && \
+		nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'; true
 docker: hosts
 	cd z_root && stow --verbose --target=$$HOME --restow docker
 hosts:

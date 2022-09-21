@@ -1,21 +1,27 @@
 #!/bin/bash
 
-sudo pacman -S \
-    kitty tmux starship zsh \
-    lsd bat \
-    --noconfirm
+PACKAGES="kitty tmux starship zsh lsd bat"
+! pacman --query $PACKAGES && sudo pacman -S $PACKAGES --noconfirm
 
-DIR=~/.oh-my-zsh
-if [[ ! -d "$DIR" ]]; then
+if [[ ! -d ~/.oh-my-zsh/ ]]; then
     sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"   
 fi
 
-echo "Installing plugins"
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
-    ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+echo "Installing ZSH plugins"
+DIR=~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+if [[ ! -d "$DIR" ]]; then
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
+        ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+fi
 
-git clone https://github.com/zsh-users/zsh-autosuggestions \
-    ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+echo "Installing ZSH plugins"
+DIR=~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+if [[ ! -d "$DIR" ]]; then
+    git clone https://github.com/zsh-users/zsh-autosuggestions \
+        ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/
+fi
 
 echo "Set zsh default as terminal"
-chsh -s /bin/zsh
+if [[ ! $SHELL == /usr/bin/zsh && ! $SHELL == /bin/zsh ]]; then
+    chsh -s /bin/zsh
+fi
