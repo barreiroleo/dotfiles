@@ -1,10 +1,11 @@
 #!/bin/bash
 
-PACKAGES="kitty tmux starship zsh lsd bat"
+PACKAGES="kitty tmux starship zsh lsd bat fzf"
 ! pacman --query $PACKAGES && sudo pacman -S $PACKAGES --noconfirm
 
 if [[ ! -d ~/.oh-my-zsh/ ]]; then
-    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"   
+    # sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"   
+    git clone https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh
 fi
 
 echo "Installing ZSH plugins"
@@ -18,7 +19,7 @@ echo "Installing ZSH plugins"
 DIR=~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 if [[ ! -d "$DIR" ]]; then
     git clone https://github.com/zsh-users/zsh-autosuggestions \
-        ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/
+        ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 fi
 
 echo "Set zsh default as terminal"

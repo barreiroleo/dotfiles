@@ -1,9 +1,12 @@
 #!/bin/bash
 
 echo "Download and install platformio"
-python3 -c "$$(curl -fsSL https://raw.githubusercontent.com/platformio/platformio/master/scripts/get-platformio.py)"
+if [[ ! -d ~/.platformio ]]; then
+    python3 -c "$(curl -fsSL https://raw.githubusercontent.com/platformio/platformio/master/scripts/get-platformio.py)"
+fi
 
 echo "Export binaries to path"
+mkdir ~/.local/bin -p
 ln -s ~/.platformio/penv/bin/platformio ~/.local/bin/platformio
 ln -s ~/.platformio/penv/bin/pio ~/.local/bin/pio
 ln -s ~/.platformio/penv/bin/piodebuggdb ~/.local/bin/piodebuggdb
@@ -24,4 +27,4 @@ sudo usermod -a -G lock $USER
 # sudo usermod -a -G plugdev $USER
 
 echo "Enable tab completion zsh"
-pio system completion install zsh
+~/.local/bin/pio system completion install zsh

@@ -14,8 +14,8 @@ delete:
 	cd private	&& stow --verbose --target=$$HOME --delete */ && cd ..
 	cd z_root	&& stow --verbose --target=/ 	  --delete */ && cd ..
 
-.PHONY: develop terminal git ssh ide docker fonts
-develop: terminal git ssh ide docker hosts fonts
+.PHONY: develop terminal git ssh vim docker fonts
+develop: terminal git ssh vim docker hosts fonts
 terminal:
 	sh terminal.sh
 	stow --verbose --target=$$HOME --restow kitty shell tmux
@@ -23,7 +23,7 @@ git: ssh
 	cd private && stow --verbose --target=$$HOME --restow git
 ssh:
 	[ ! -d ~/.ssh ] && cd private && stow --verbose --target=$$HOME --restow ssh; true
-ide:
+vim:
 	! pacman --query neovim && sudo pacman -S neovim; true
 	! pacman --query xclip	&& sudo pacman -S xclip wl-clipboard; true
 	stow --verbose --target=$$HOME --restow vim
@@ -40,12 +40,10 @@ hosts:
 fonts:
 	sh fonts.sh
 
-.PHONY: develop-apps nvim platformio
-develop-apps: nvim platformio
+.PHONY: develop-apps basic platformio
+develop-apps: basic platformio
 basic:
 	sudo pacman -S base-devel
-nvim:
-	sudo pacman -S neovim
 platformio:
 	sh platformio.sh
 
