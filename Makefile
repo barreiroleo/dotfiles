@@ -21,6 +21,7 @@ terminal:
 	sh terminal.sh
 	stow --verbose --target=$$HOME --restow kitty shell tmux
 git: ssh
+	! pacman --query lazygit && sudo pacman -S lazygit; true
 	cd private && stow --verbose --target=$$HOME --restow git bin
 ssh:
 	[ ! -d ~/.ssh ] && cd private && stow --verbose --target=$$HOME --restow ssh; true
