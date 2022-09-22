@@ -30,7 +30,11 @@ ide:
 	[ ! -d ~/.local/share/nvim/mason ] && \
 		nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'; true
 docker: hosts
+	! pacman --query docker && sudo pacman -S docker; true
 	cd z_root && stow --verbose --target=$$HOME --restow docker
+	sudo systemctl start docker.service
+	sudo systemctl enable docker.service
+	sudo usermod -aG docker $$USER
 hosts:
 	cd z_root && stow --verbose --target=$$HOME --restow hosts
 fonts:
@@ -38,6 +42,8 @@ fonts:
 
 .PHONY: develop-apps nvim platformio
 develop-apps: nvim platformio
+basic:
+	sudo pacman -S base-devel
 nvim:
 	sudo pacman -S neovim
 platformio:

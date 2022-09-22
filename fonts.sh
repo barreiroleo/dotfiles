@@ -6,8 +6,12 @@ sudo pacman -S \
     --noconfirm
 
 echo "Installing Ubuntu Nerd Font"
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/UbuntuMono.zip
-unzip -d UbuntuMono UbuntuMono.zip && mv UbuntuMono/ ~/.local/share/fonts/ && rm Ubuntu*.zip
+if [[ -d ~/.local/share/fonts/UbuntuMono ]]; then
+    wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/UbuntuMono.zip
+    mkdir ~/.local/share/fonts/UbuntuMono/ -p
+    unzip -d UbuntuMono UbuntuMono.zip && mv UbuntuMono/ ~/.local/share/fonts/UbuntuMono
+    rm UbuntuMono.zip*
+fi
 
 echo "Recaching fonts"
 fc-cache -fv
