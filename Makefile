@@ -52,6 +52,7 @@ desktop: gnome conky ulauncher
 gnome:
 	stow --verbose --target=$$HOME --restow gnome
 conky:
+	! pacman --query conky && sudo pacman -S conky; true
 	stow --verbose --target=$$HOME --restow conky
 ulauncher:
 	stow --verbose --target=$$HOME --restow ulauncher
