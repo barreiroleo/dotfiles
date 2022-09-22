@@ -14,13 +14,14 @@ delete:
 	cd private	&& stow --verbose --target=$$HOME --delete */ && cd ..
 	cd z_root	&& stow --verbose --target=/ 	  --delete */ && cd ..
 
-.PHONY: develop terminal git ssh vim docker fonts
-develop: terminal git ssh vim docker hosts fonts
+
+.PHONY: develop terminal git ssh vim docker fonts platformio
+develop: terminal git ssh vim docker hosts fonts platformio
 terminal:
 	sh terminal.sh
 	stow --verbose --target=$$HOME --restow kitty shell tmux
 git: ssh
-	cd private && stow --verbose --target=$$HOME --restow git
+	cd private && stow --verbose --target=$$HOME --restow git bin
 ssh:
 	[ ! -d ~/.ssh ] && cd private && stow --verbose --target=$$HOME --restow ssh; true
 vim:
@@ -39,21 +40,18 @@ hosts:
 	cd z_root && stow --verbose --target=$$HOME --restow hosts
 fonts:
 	sh fonts.sh
-
-.PHONY: develop-apps basic platformio
-develop-apps: basic platformio
-basic:
-	sudo pacman -S base-devel
 platformio:
 	sh platformio.sh
 
 .PHONY: desktop gnome conky ulauncher
 desktop: gnome conky ulauncher
 gnome:
+	rm ~/.config/user-dirs.dirs ~/.config/user-dirs.locale
 	stow --verbose --target=$$HOME --restow gnome
 conky:
 	! pacman --query conky && sudo pacman -S conky; true
-	stow --verbose --target=$$HOME --restow conky
+	stow --verbose --target=$$HOME --restow conky bin
 ulauncher:
+	! pacman --query ulauncher && yay -S ulauncher --noconfirm; true
 	stow --verbose --target=$$HOME --restow ulauncher
 
