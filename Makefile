@@ -1,20 +1,8 @@
 .PHONY: default all delete
-default: develop desktop
+default:
 	! pacman --query stow && sudo pacman -S stow; true
 
-all:
-	stow --verbose --target=$$HOME --restow */ 
-	stow --verbose --target=$$HOME --delete private z_root
-	cd private	&& stow --verbose --target=$$HOME --restow */ && cd ..
-	cd z_root	&& stow --verbose --target=/ 	  --restow */ && cd ..
-
-delete:
-	stow --verbose --target=$$HOME --delete */ 
-	cd private	&& stow --verbose --target=$$HOME --delete */ && cd ..
-	cd z_root	&& stow --verbose --target=/ 	  --delete */ && cd ..
-
-
-.PHONY: develop terminal git ssh vim docker fonts platformio
+.PHONY: develop terminal git ssh vim docker hosts fonts platformio
 develop: terminal git ssh vim docker hosts fonts platformio
 terminal:
 	sh terminal.sh
@@ -23,7 +11,7 @@ terminal:
 git: ssh
 	! pacman --query lazygit && sudo pacman -S lazygit; true
 	cd private && stow --verbose --target=$$HOME --restow git bin
-	
+
 ssh:
 	[ ! -d ~/.ssh ] && cd private && stow --verbose --target=$$HOME --restow ssh; true
 
@@ -56,6 +44,13 @@ desktop: gnome conky ulauncher
 gnome:
 	rm ~/.config/user-dirs.dirs ~/.config/user-dirs.locale
 	stow --verbose --target=$$HOME --restow gnome
+	! pacman --query gnome-software && sudo pacman -S gnome-software --noconfirm; true
+	! pacman --query nautilus && sudo pacman -S nautilus --noconfirm; true
+	! pacman --query nautilus-open-any-terminal && yay -S nautilus-open-any-terminal --noconfirm && \
+		gsettings set com.github.stunkymonkey.nautilus-open-any-terminal terminal kitty && \
+		gsettings set com.github.stunkymonkey.nautilus-open-any-terminal keybindings 'F4' && \
+		gsettings set com.github.stunkymonkey.nautilus-open-any-terminal new-tab; true
+
 
 conky:
 	! pacman --query conky && sudo pacman -S conky; true
@@ -64,7 +59,6 @@ conky:
 ulauncher:
 	! pacman --query ulauncher && yay -S ulauncher --noconfirm; true
 	stow --verbose --target=$$HOME --restow ulauncher
-
 flatpak:
 	! pacman --query flatpak && \
 		sudo mkdir -p /opt/flatpak/ && \
