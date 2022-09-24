@@ -16,11 +16,8 @@ ssh:
 	[ ! -d ~/.ssh ] && cd private && stow --verbose --target=$$HOME --restow ssh; true
 
 vim:
-	! pacman --query neovim && sudo pacman -S neovim; true
-	! pacman --query xclip	&& sudo pacman -S xclip wl-clipboard; true
 	stow --verbose --target=$$HOME --restow vim
-	[ ! -d ~/.local/share/nvim/mason ] && \
-		nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'; true
+	sh nvim.sh
 
 docker: hosts
 	! pacman --query docker && sudo pacman -S docker; true
