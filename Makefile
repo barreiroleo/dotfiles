@@ -53,7 +53,4 @@ ulauncher:
 	! pacman --query ulauncher && yay -S ulauncher --noconfirm; true
 	stow --verbose --target=$$HOME --restow ulauncher
 flatpak:
-	! pacman --query flatpak && \
-		sudo mkdir -p /opt/flatpak/ && \
-		sudo ln -s /opt/flatpak/ /var/lib/ && \
-		sudo pacman -S flatpak --noconfirm; true
+	sh flatpack.sh
