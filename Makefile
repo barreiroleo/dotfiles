@@ -42,15 +42,8 @@ platformio:
 desktop: gnome conky ulauncher
 
 gnome:
-	rm ~/.config/user-dirs.dirs ~/.config/user-dirs.locale
+	sh gnome.sh
 	stow --verbose --target=$$HOME --restow gnome
-	! pacman --query gnome-software && sudo pacman -S gnome-software --noconfirm; true
-	! pacman --query nautilus && sudo pacman -S nautilus --noconfirm; true
-	! pacman --query nautilus-open-any-terminal && yay -S nautilus-open-any-terminal --noconfirm && \
-		gsettings set com.github.stunkymonkey.nautilus-open-any-terminal terminal kitty && \
-		gsettings set com.github.stunkymonkey.nautilus-open-any-terminal keybindings 'F4' && \
-		gsettings set com.github.stunkymonkey.nautilus-open-any-terminal new-tab; true
-
 
 conky:
 	! pacman --query conky && sudo pacman -S conky; true
