@@ -20,11 +20,8 @@ vim:
 	sh nvim.sh
 
 docker: hosts
-	! pacman --query docker && sudo pacman -S docker; true
+	sh docker.sh
 	cd z_root && stow --verbose --target=$$HOME --restow docker
-	sudo systemctl start docker.service
-	sudo systemctl enable docker.service
-	sudo usermod -aG docker $$USER
 
 hosts:
 	cd z_root && stow --verbose --target=$$HOME --restow hosts
