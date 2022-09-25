@@ -1,6 +1,8 @@
-.PHONY: default develop all delete
+.PHONY: default dirs develop
 default:
 	! pacman --query stow && sudo pacman -S stow --noconfirm; true
+dirs:
+	mkdir -p ~/.local/bin/ ~/.ssh/
 
 DEVELOP = terminal git ssh vim docker hosts fonts platformio
 develop: $(DEVELOP)
@@ -10,11 +12,11 @@ terminal:
 	sh terminal.sh
 	stow --verbose --target=$$HOME --restow kitty shell tmux
 
-git: ssh
+git: dirs ssh
 	! pacman --query lazygit && sudo pacman -S lazygit --noconfirm; true
 	cd private && stow --verbose --target=$$HOME --restow git
 
-ssh:
+ssh: dirs
 	[ ! -d ~/.ssh ] && cd private && stow --verbose --target=$$HOME --restow ssh; true
 
 vim:
@@ -49,4 +51,4 @@ ulauncher:
 	stow --verbose --target=$$HOME --restow ulauncher
 	
 flatpak:
-	sh flatpack.sh
+	sh flatpak.sh

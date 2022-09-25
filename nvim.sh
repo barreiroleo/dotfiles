@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PACKAGES="xclip wl-clipboard"
+PACKAGES="xclip wl-clipboard npm"
 ! pacman --query $PACKAGES && sudo pacman -S $PACKAGES --noconfirm
 
 # Only for winbar. On 0.8 stable i will back.
