@@ -1,6 +1,6 @@
 .PHONY: default all delete
 default:
-	! pacman --query stow && sudo pacman -S stow; true
+	! pacman --query stow && sudo pacman -S stow --noconfirm; true
 
 .PHONY: develop terminal git ssh vim docker hosts fonts platformio
 develop: terminal git ssh vim docker hosts fonts platformio
@@ -9,7 +9,7 @@ terminal:
 	stow --verbose --target=$$HOME --restow kitty shell tmux
 
 git: ssh
-	! pacman --query lazygit && sudo pacman -S lazygit; true
+	! pacman --query lazygit && sudo pacman -S lazygit --noconfirm; true
 	cd private && stow --verbose --target=$$HOME --restow git bin
 
 ssh:
@@ -40,7 +40,7 @@ gnome:
 	stow --verbose --target=$$HOME --restow gnome
 
 conky:
-	! pacman --query conky && sudo pacman -S conky; true
+	! pacman --query conky && sudo pacman -S conky --noconfirm; true
 	stow --verbose --target=$$HOME --restow conky bin
 
 ulauncher:
