@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PACKAGES="kitty tmux starship zsh lsd bat fzf"
-! pacman --query $PACKAGES && sudo pacman -S $PACKAGES --noconfirm
+! pacman --query $PACKAGES && sudo pacman -Sy $PACKAGES --noconfirm
 
 if [[ ! -d ~/.oh-my-zsh/ ]]; then
     # sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"   

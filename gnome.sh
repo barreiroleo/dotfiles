@@ -3,8 +3,8 @@
 TERMINAL=kitty
 
 PACKAGES="gnome-software nautilus"
-! pacman --query $PACKAGES                  && sudo pacman -S $PACKAGES --noconfirm
-! pacman --query nautilus-open-any-terminal && yay -S nautilus-open-any-terminal --noconfirm
+! pacman --query $PACKAGES                  && sudo pacman -Sy $PACKAGES --noconfirm
+! pacman --query nautilus-open-any-terminal && yay -Sy nautilus-open-any-terminal --noconfirm
 
 TERM_SET=$(gsettings get com.github.stunkymonkey.nautilus-open-any-terminal terminal)
 if [[ $TERM_SET != "'$TERMINAL'" ]]; then

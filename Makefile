@@ -1,6 +1,6 @@
 .PHONY: default dirs develop
 default:
-	! pacman --query stow && sudo pacman -S stow --noconfirm; true
+	! pacman --query stow && sudo pacman -Sy stow --noconfirm; true
 dirs:
 	mkdir -p ~/.local/bin/ ~/.ssh/
 
@@ -13,7 +13,7 @@ terminal:
 	stow --verbose --target=$$HOME --restow kitty shell tmux
 
 git: dirs ssh
-	! pacman --query lazygit && sudo pacman -S lazygit --noconfirm; true
+	! pacman --query lazygit && sudo pacman -Sy lazygit --noconfirm; true
 	cd private && stow --verbose --target=$$HOME --restow git
 
 ssh: dirs
@@ -43,11 +43,11 @@ gnome:
 	stow --verbose --target=$$HOME --restow gnome
 
 conky:
-	! pacman --query conky && sudo pacman -S conky --noconfirm; true
+	! pacman --query conky && sudo pacman -Sy conky --noconfirm; true
 	stow --verbose --target=$$HOME --restow conky
 
 ulauncher:
-	! pacman --query ulauncher && yay -S ulauncher --noconfirm; true
+	! pacman --query ulauncher && yay -Sy ulauncher --noconfirm; true
 	stow --verbose --target=$$HOME --restow ulauncher
 	
 flatpak:
