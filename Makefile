@@ -3,9 +3,10 @@ default:
 	! pacman --query stow && sudo pacman -Sy stow --noconfirm; true
 dirs:
 	mkdir -p ~/.local/bin/ ~/.ssh/
+all: default dirs $(DEVELOP) $(DESKTOP)
 
 DEVELOP = terminal git ssh vim docker hosts fonts platformio
-develop: $(DEVELOP)
+develop: default $(DEVELOP)
 .PHONY:  $(DEVELOP)
 
 terminal:
@@ -37,7 +38,9 @@ platformio:
 	sh platformio.sh
 
 
-.PHONY: gnome conky ulauncher flatpak
+DESKTOP = gnome conky ulauncher flatpak
+desktop: default $(DESKTOP)
+.PHONY:  $(DESKTOP)
 gnome:
 	sh gnome.sh
 	stow --verbose --target=$$HOME --restow gnome
