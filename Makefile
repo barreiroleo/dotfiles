@@ -1,14 +1,15 @@
-.PHONY: default dirs develop
+DESKTOP_PACKAGES = gnome conky ulauncher flatpak
+DEVELOP_PACKAGES = terminal git ssh vim docker hosts fonts platformio
+
+.PHONY: all default dirs develop desktop
+all: default dirs $(DEVELOP_PACKAGES) $(DESKTOP_PACKAGES)
 default:
 	! pacman --query stow && sudo pacman -Sy stow --noconfirm; true
 dirs:
 	mkdir -p ~/.local/bin/ ~/.ssh/
-all: default dirs $(DEVELOP) $(DESKTOP)
 
-DEVELOP = terminal git ssh vim docker hosts fonts platformio
-develop: default $(DEVELOP)
-.PHONY:  $(DEVELOP)
-
+.PHONY:  $(DEVELOP_PACKAGES)
+develop: default $(DEVELOP_PACKAGES)
 terminal:
 	sh terminal.sh
 	stow --verbose --target=$$HOME --restow kitty shell tmux
@@ -38,9 +39,8 @@ platformio:
 	sh platformio.sh
 
 
-DESKTOP = gnome conky ulauncher flatpak
-desktop: default $(DESKTOP)
-.PHONY:  $(DESKTOP)
+.PHONY:  $(DESKTOP_PACKAGES)
+desktop: default $(DESKTOP_PACKAGES)
 gnome:
 	sh gnome.sh
 	stow --verbose --target=$$HOME --restow gnome
