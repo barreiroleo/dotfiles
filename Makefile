@@ -19,7 +19,7 @@ git: dirs ssh
 	cd private && stow --verbose --target=$$HOME --restow git
 
 ssh: dirs
-	[ ! -d ~/.ssh ] && cd private && stow --verbose --target=$$HOME --restow ssh; true
+	[ ! -d ~/.ssh/id_rsa ] && cd private && stow --verbose --target=$$HOME --restow ssh; true
 
 vim:
 	stow --verbose --target=$$HOME --restow vim

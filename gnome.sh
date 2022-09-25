@@ -26,4 +26,9 @@ if [[ ! -d ~/dotfiles/private/gnome/extensions.conf.bak ]]; then
     dconf dump /org/gnome/shell/extensions/ > extensions.conf.bak
 fi
 
-dconf load /org/gnome/shell/extensions/ < ~/dotfiles/private/gnome/extensions.conf
+dconf load / < ~/dotfiles/private/gnome/app-folders.conf
+dconf load / < ~/dotfiles/private/gnome/bindings.conf
+dconf load / < ~/dotfiles/private/gnome/general.conf
+dconf load / < ~/dotfiles/private/gnome/nautilus.conf
+dconf load / < ~/dotfiles/private/gnome/peripherals.conf
+dconf load /org/gnome/shell/ < ~/dotfiles/private/gnome/shell.conf
