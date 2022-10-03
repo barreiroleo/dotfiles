@@ -26,3 +26,8 @@ echo "Set zsh default as terminal"
 if [[ ! $SHELL == /usr/bin/zsh && ! $SHELL == /bin/zsh ]]; then
     chsh -s /bin/zsh
 fi
+
+if [[ ! -d "/usr/bin/gnome-terminal.bak" ]]; then
+    sudo mv /usr/bin/gnome-terminal /usr/bin/gnome-terminal.bak
+    sudo ln -s /usr/bin/kitty /usr/bin/gnome-terminal
+fi
