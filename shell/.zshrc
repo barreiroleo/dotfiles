@@ -13,33 +13,11 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
 # Skip verification of insecure directories. Para linkear configuraciones entre usuario y root.
 ZSH_DISABLE_COMPFIX=true
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/leonardo/.oh-my-zsh"
-
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# ZSH_THEME="powerlevel10k/powerlevel10k"
-
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
 
 # Uncomment one of the following lines to change the auto-update behavior
 # zstyle ':omz:update' mode disabled  # disable automatic updates
@@ -70,7 +48,7 @@ ENABLE_CORRECTION="true"
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
@@ -91,43 +69,8 @@ ENABLE_CORRECTION="true"
 plugins=(command-not-found zsh-interactive-cd zsh-syntax-highlighting zsh-autosuggestions 
     git vi-mode fzf sudo timer compleat extract)
 
+eval "$(starship init zsh)"
 source $ZSH/oh-my-zsh.sh
-
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-alias gmv='git mv'
-alias ls='lsd --group-dirs=first'
-alias l='ls -l'
-alias lh='ls -a'
-alias la='ls -la'
-alias ll='ls -lah'
-alias cat='bat'
-alias ovim=/usr/bin/vim  #Old vim
-alias vim=nvim
-alias vim-up="vim -c 'autocmd User PackerComplete quitall' -c 'PackerSync'"
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Autorefresh packages names after package install
 zstyle ':completion:*' rehash true
@@ -146,24 +89,31 @@ zvm_after_init() {
 
 # Colors
 export LS_COLORS="rs=0:no=00:mi=00:mh=00:ln=01;36:or=01;31:di=01;34:ow=04;01;34:st=34:tw=04;34:pi=01;33:so=01;33:do=01;33:bd=01;33:cd=01;33:su=01;35:sg=01;35:ca=01;35:ex=01;32:"
-export KEYTIMEOUT=20	# Escape mode faster (vi-mode plugin)
-export EDITOR=nvim
-# Begin: PlatformIO Core completion support
 eval "$(_PIO_COMPLETE=zsh_source pio)"
-# End: PlatformIO Core completion support
 
+# Escape mode faster (vi-mode plugin)
+export KEYTIMEOUT=20
+export EDITOR=nvim
+
+# For a full list of active aliases, run `alias`.
+alias zshconfig="nvim ~/.zshrc"
+alias ohmyzsh="nvim ~/.oh-my-zsh"
+
+alias cat='bat'
+alias ls='lsd --group-dirs=first'
+alias l='ls -l'
+alias lh='ls -a'
+alias la='ls -la'
+alias ll='ls -lah'
+
+alias vim=nvim
 alias dvim='docker exec -it nvim nvim'
 alias dvim-clean='docker exec -it nvim rm root/.cache/nvim/ root/.local/share/nvim/ -r; sleep 0.5; dvim'
 alias dvim-sync="dvim -c 'autocmd User PackerComplete quitall' -c 'PackerSync'"
 alias dvim-comp="dvim --headless -c 'PackerCompile' -c 'quitall'"
 alias dvim-test='dvim-comp; docker exec -it nvim nvim -c "cd /root/.config/nvim/lua/test/"'
+
 alias glgf='git lgf'
 alias glg='git lg'
 alias gdv='git difftool'
 alias lg='lazygit'
-
-alias tw='task'
-alias tt='taskwarrior-tui'
-
-eval "$(starship init zsh)"
-eval "$(navi widget zsh)"
