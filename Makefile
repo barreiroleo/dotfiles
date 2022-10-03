@@ -49,9 +49,13 @@ conky:
 	! pacman --query conky && sudo pacman -Sy conky --noconfirm; true
 	stow --verbose --target=$$HOME --restow conky
 
-ulauncher:
-	! pacman --query ulauncher && yay -Sy ulauncher --noconfirm; true
+ulauncher: qalc
+	! pacman --query ulauncher wmctrl && yay -S ulauncher wmctrl --noconfirm; true
 	stow --verbose --target=$$HOME --restow ulauncher
 	
 flatpak:
 	sh flatpak.sh
+
+qalc:
+	! pacman --query qalculate-gtk && yay -S qalculate-gtk --noconfirm; true
+

@@ -1,1 +1,23 @@
-{}
+{
+    "com.github.hippo-o-matic.ulauncher-qalc": {
+        "id": "com.github.hippo-o-matic.ulauncher-qalc",
+        "url": "https://github.com/hippo-o-matic/ulauncher-qalc",
+        "updated_at": "2022-09-27T17:43:22.485817",
+        "last_commit": "45882831f57c265ee3b4bf47cdb862379d47a89a",
+        "last_commit_time": "2021-03-03T03:33:36"
+    },
+    "com.github.luispabon.ulauncher-virtualbox": {
+        "id": "com.github.luispabon.ulauncher-virtualbox",
+        "url": "https://github.com/luispabon/ulauncher-virtualbox",
+        "updated_at": "2022-09-27T17:43:34.691471",
+        "last_commit": "d8f495df3c7f41ee8493b207d17f06fc0372c84e",
+        "last_commit_time": "2020-09-23T01:29:15"
+    },
+    "com.github.manahter.ulauncher-translate": {
+        "id": "com.github.manahter.ulauncher-translate",
+        "url": "https://github.com/manahter/ulauncher-translate",
+        "updated_at": "2022-09-28T15:27:19.200077",
+        "last_commit": "f81d32c583c7e3542bdba655e991a56e6d9a2c28",
+        "last_commit_time": "2021-04-09T18:12:40"
+    }
+}
