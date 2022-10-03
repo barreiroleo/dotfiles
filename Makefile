@@ -1,5 +1,6 @@
 DESKTOP_PACKAGES = gnome conky ulauncher flatpak
 DEVELOP_PACKAGES = terminal git ssh vim docker hosts fonts platformio
+DEVELOP_PACKAGES = terminal git ssh vim docker hosts fonts platformio code virtualbox
 
 .PHONY: all default dirs develop desktop
 all: default dirs $(DEVELOP_PACKAGES) $(DESKTOP_PACKAGES)
@@ -38,6 +39,8 @@ fonts:
 platformio:
 	sh platformio.sh
 
+virtualbox:
+	sh virtualbox.sh
 
 .PHONY:  $(DESKTOP_PACKAGES)
 desktop: default $(DESKTOP_PACKAGES)
