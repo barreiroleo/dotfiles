@@ -73,5 +73,8 @@ pdf:
 	! pacman --query sioyek-appimage && yay -S sioyek-appimage --noconfirm; true
 
 stream:
+	! pacman --query iriunwebcam-bin && yay -S iriunwebcam-bin --noconfirm; true
+	sudo rmmod v4l2loopback; sudo modprobe v4l2loopback
 	! pacman --query obs-studio qt5-wayland qt6-wayland && sudo pacman -S obs-studio qt5-wayland qt6-wayland --noconfirm; true
+	! pacman --query zoom && yay -S zoom --noconfirm; true
 	cd private && stow --verbose --target=$$HOME --restow obs
