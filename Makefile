@@ -1,5 +1,6 @@
 DESKTOP_PACKAGES = gnome conky ulauncher flatpak
 DEVELOP_PACKAGES = terminal git ssh vim docker hosts fonts platformio
+DESKTOP_PACKAGES = gnome conky ulauncher flatpak qalc pdf stream
 DEVELOP_PACKAGES = terminal git ssh vim docker hosts fonts platformio code virtualbox
 
 .PHONY: all default dirs develop desktop
@@ -62,3 +63,6 @@ flatpak:
 qalc:
 	! pacman --query qalculate-gtk && yay -S qalculate-gtk --noconfirm; true
 
+stream:
+	! pacman --query obs-studio qt5-wayland qt6-wayland && sudo pacman -S obs-studio qt5-wayland qt6-wayland --noconfirm; true
+	cd private && stow --verbose --target=$$HOME --restow obs
