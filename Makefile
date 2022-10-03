@@ -1,4 +1,3 @@
-DESKTOP_PACKAGES = gnome conky ulauncher flatpak
 DESKTOP_PACKAGES = gnome conky ulauncher flatpak qalc pdf stream
 DEVELOP_PACKAGES = terminal git ssh vim docker hosts fonts platformio code cmake virtualbox
 
@@ -69,6 +68,9 @@ flatpak:
 
 qalc:
 	! pacman --query qalculate-gtk && yay -S qalculate-gtk --noconfirm; true
+
+pdf:
+	! pacman --query sioyek-appimage && yay -S sioyek-appimage --noconfirm; true
 
 stream:
 	! pacman --query obs-studio qt5-wayland qt6-wayland && sudo pacman -S obs-studio qt5-wayland qt6-wayland --noconfirm; true
