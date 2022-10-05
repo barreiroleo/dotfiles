@@ -1,5 +1,6 @@
 DESKTOP_PACKAGES = gnome conky ulauncher flatpak qalc pdf stream
 DEVELOP_PACKAGES = terminal git ssh vim docker hosts fonts platformio code cmake virtualbox
+SYSTEM_PACKAGES = appimages monitor network
 
 .PHONY: all default dirs develop desktop
 all: default dirs $(DEVELOP_PACKAGES) $(DESKTOP_PACKAGES)
@@ -48,6 +49,13 @@ virtualbox:
 cmake:
 	! pacman --query cmake && yay -S cmake --noconfirm; true
 
+.PHONY: $(SYSTEM_PACKAGES)
+appimages:
+	sh appimages.sh
+monitor:
+	$(install-pac) bottom
+network:
+	$(install-pac) nethogs bandwhich
 
 .PHONY:  $(DESKTOP_PACKAGES)
 desktop: default $(DESKTOP_PACKAGES)
