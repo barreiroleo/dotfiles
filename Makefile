@@ -23,9 +23,9 @@ conky:
 	$(install-pac) conky
 	stow --verbose --target=$$HOME --restow conky
 fonts:
-	sh fonts.sh
+	sh ./scripts/fonts.sh
 gnome:
-	sh gnome.sh
+	sh ./scripts/gnome.sh
 	stow --verbose --target=$$HOME --restow gnome
 ulauncher: qalc
 	$(install-pac) ulauncher wmctrl
@@ -37,7 +37,7 @@ web:
 DEVELOP_PACKAGES = terminal git ssh vim code docker virtualbox platformio cmake draw
 .PHONY: $(DEVELOP_PACKAGES)
 terminal: fonts
-	sh terminal.sh
+	sh ./scripts/terminal.sh
 	stow --verbose --target=$$HOME --restow kitty shell tmux
 git: dirs ssh
 	$(install-pac) lazygit
@@ -46,16 +46,16 @@ ssh: dirs
 	[ ! -d ~/.ssh/id_rsa ] && cd private && stow --verbose --target=$$HOME --restow ssh; true
 vim:
 	stow --verbose --target=$$HOME --restow vim
-	sh nvim.sh
+	sh ./scripts/nvim.sh
 code:
 	$(install-yay) visual-studio-code-bin
 docker: hosts
-	sh docker.sh
+	sh ./scripts/docker.sh
 	cd z_root && stow --verbose --target=$$HOME --restow docker
 virtualbox:
-	sh virtualbox.sh
+	sh ./scripts/virtualbox.sh
 platformio:
-	sh platformio.sh
+	sh ./scripts/platformio.sh
 cmake:
 	$(install-pac) cmake
 draw:
@@ -63,7 +63,7 @@ draw:
 	$(install-pac) inkscape
 
 
-OFFICE_PACKAGES  = pdf qalc
+OFFICE_PACKAGES = pdf qalc
 .PHONY: $(OFFICE_PACKAGES)
 pdf:
 	$(install-yay) sioyek-appimage
@@ -71,7 +71,7 @@ qalc:
 	$(install-pac) qalculate-gtk
 
 
-STREAM_PACKAGES  = iriunwebcam obs zoom
+STREAM_PACKAGES = iriunwebcam obs zoom
 .PHONY: $(STREAM_PACKAGES)
 iriunwebcam:
 	$(install-pac) iriunwebcam-bin
@@ -83,12 +83,12 @@ zoom:
 	$(install-yay) zoom
 
 
-SYSTEM_PACKAGES  = appimages flatpak hosts monitor network
+SYSTEM_PACKAGES = appimages flatpak hosts monitor network
 .PHONY: $(SYSTEM_PACKAGES)
 appimages:
-	sh appimages.sh
+	sh ./scripts/appimages.sh
 flatpak:
-	sh flatpak.sh
+	sh ./scripts/flatpak.sh
 hosts:
 	cd z_root && stow --verbose --target=$$HOME --restow hosts
 monitor:
