@@ -1,34 +1,58 @@
 #!/bin/bash
 
-TERMINAL=kitty
+install_packages ()
+{
+    PACKAGES="gnome dconf-editor ghex gnome-connections gnome-mines gnome-sudoku gnome-tweaks gnome-usage sysprof gnome-browser-connector"
+    sh ./scripts/query_install.sh pacman $PACKAGES
+}
 
-PACKAGES="gnome-software nautilus gnome-shell-extensions"
-! pacman --query $PACKAGES                  && sudo pacman -Sy $PACKAGES --noconfirm
-! pacman --query nautilus-open-any-terminal && yay -Sy nautilus-open-any-terminal --noconfirm
+open_terminal ()
+{
+    sh ./scripts/query_install.sh yay nautilus-open-any-terminal
 
-TERM_SET=$(gsettings get com.github.stunkymonkey.nautilus-open-any-terminal terminal)
-if [[ $TERM_SET != "'$TERMINAL'" ]]; then
-    gsettings set com.github.stunkymonkey.nautilus-open-any-terminal terminal $TERMINAL
-    gsettings set com.github.stunkymonkey.nautilus-open-any-terminal keybindings 'F4'
-    gsettings set com.github.stunkymonkey.nautilus-open-any-terminal new-tab
-    echo $TERMINAL
-fi
+    local TERMINAL=kitty
+    local TERM_SET=$(gsettings get com.github.stunkymonkey.nautilus-open-any-terminal terminal)
 
-rm ~/.config/user-dirs.dirs ~/.config/user-dirs.locale
+    if [[ $TERM_SET != "'$TERMINAL'" ]]; then
+        gsettings set com.github.stunkymonkey.nautilus-open-any-terminal terminal $TERMINAL
+        gsettings set com.github.stunkymonkey.nautilus-open-any-terminal keybindings 'F4'
+        gsettings set com.github.stunkymonkey.nautilus-open-any-terminal new-tab
+        echo $TERMINAL
+    fi
+}
 
-sh ~/dotfiles/private/gnome/extensions.sh
+locale_dirs ()
+{
+    local FILE=~/.config/user-dirs.dirs
+    if [[ -d "$FILE" ]]; then rm FILE; fi
+    local FILE=~/.config/user-dirs.locale
+    if [[ -d "$FILE" ]]; then rm FILE; fi
+}
 
-if [[ ! -d ~/dotfiles/private/gnome/dconf-all.conf.bak ]]; then
-    dconf dump / > dconf-all.conf.bak
-fi
+install_extensions () { sh ~/dotfiles/private/gnome/extensions.sh; }
 
-if [[ ! -d ~/dotfiles/private/gnome/extensions.conf.bak ]]; then
-    dconf dump /org/gnome/shell/extensions/ > extensions.conf.bak
-fi
+dconf_backup_settings ()
+{
+    local FILE=~/dotfiles/private/gnome/dconf-all.conf.bak
+    if [[ ! -d "$FILE" ]]; then dconf dump / > $FILE; fi
 
-dconf load / < ~/dotfiles/private/gnome/app-folders.conf
-dconf load / < ~/dotfiles/private/gnome/bindings.conf
-dconf load / < ~/dotfiles/private/gnome/general.conf
-dconf load / < ~/dotfiles/private/gnome/nautilus.conf
-dconf load / < ~/dotfiles/private/gnome/peripherals.conf
-dconf load /org/gnome/shell/ < ~/dotfiles/private/gnome/shell.conf
+    FILE=~/dotfiles/private/gnome/extensions.conf.bak
+    if [[ ! -d "$FILE" ]]; then dconf dump /org/gnome/shell/extensions/ > $FILE; fi
+}
+
+dconf_restore_settings ()
+{
+    dconf load / < ~/dotfiles/private/gnome/app-folders.conf
+    gsettings set org.gnome.shell app-picker-layout "[]"
+    dconf load / < ~/dotfiles/private/gnome/bindings.conf
+    dconf load / < ~/dotfiles/private/gnome/general.conf
+    dconf load / < ~/dotfiles/private/gnome/nautilus.conf
+    dconf load / < ~/dotfiles/private/gnome/peripherals.conf
+    dconf load /org/gnome/shell/ < ~/dotfiles/private/gnome/shell.conf
+}
+
+install_packages
+open_terminal
+locale_dirs
+dconf_backup_settings
+dconf_restore_settings
