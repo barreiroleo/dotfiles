@@ -42,6 +42,7 @@ dconf_backup_settings ()
 
 dconf_restore_settings ()
 {
+    dconf reset -f /org/gnome/desktop/app-folders/
     dconf load / < ~/dotfiles/private/gnome/app-folders.conf
     gsettings set org.gnome.shell app-picker-layout "[]"
     dconf load / < ~/dotfiles/private/gnome/bindings.conf
