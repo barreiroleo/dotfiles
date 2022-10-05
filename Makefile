@@ -1,11 +1,13 @@
-DESKTOP_PACKAGES = gnome conky ulauncher flatpak qalc pdf stream
-DEVELOP_PACKAGES = terminal git ssh vim docker hosts fonts platformio code cmake virtualbox
+DESKTOP_PACKAGES = gnome conky ulauncher flatpak stream
+DEVELOP_PACKAGES = terminal git ssh vim docker hosts fonts platformio code cmake virtualbox draw
+STREAM_PACKAGES  = iriunwebcam obs zoom
+OFFICE_PACKAGES  = qalc pdf
 SYSTEM_PACKAGES = appimages monitor network
 
-.PHONY: all default dirs develop desktop
 install-pac:=sh ./scripts/query_install.sh pacman
 install-yay:=sh ./scripts/query_install.sh yay
 
+.PHONY: all default dirs
 all: default dirs $(DEVELOP_PACKAGES) $(DESKTOP_PACKAGES)
 default:
 	sudo pacman -Sy
@@ -13,8 +15,13 @@ default:
 dirs:
 	mkdir -p ~/.local/bin/ ~/.ssh/
 
-.PHONY:  $(DEVELOP_PACKAGES)
+.PHONY: develop desktop stream office
 develop: default $(DEVELOP_PACKAGES)
+desktop: default $(DESKTOP_PACKAGES)
+stream:  default $(STREAM_PACKAGES)
+office:  default $(OFFICE_PACKAGES)
+
+.PHONY: $(DEVELOP_PACKAGES)
 terminal:
 	sh terminal.sh
 	stow --verbose --target=$$HOME --restow kitty shell tmux
@@ -35,6 +42,8 @@ code:
 docker: hosts
 	sh docker.sh
 	cd z_root && stow --verbose --target=$$HOME --restow docker
+virtualbox:
+	sh virtualbox.sh
 
 hosts:
 	cd z_root && stow --verbose --target=$$HOME --restow hosts
@@ -48,8 +57,9 @@ platformio:
 cmake:
 	$(install-pac) cmake
 
-virtualbox:
-	sh virtualbox.sh
+draw:
+	$(install-yay) drawio-desktop-bin
+	$(install-pac) inkscape
 
 
 .PHONY: $(SYSTEM_PACKAGES)
@@ -60,28 +70,28 @@ monitor:
 network:
 	$(install-pac) nethogs bandwhich
 
-.PHONY:  $(DESKTOP_PACKAGES)
-desktop: default $(DESKTOP_PACKAGES)
+.PHONY: $(DESKTOP_PACKAGES)
 gnome:
 	sh gnome.sh
 	stow --verbose --target=$$HOME --restow gnome
-
+web:
+	$(install-yay) firefox-pwa-bin brave-bin
 conky:
 	$(install-pac) conky
 	stow --verbose --target=$$HOME --restow conky
-
 ulauncher: qalc
 	$(install-pac) ulauncher wmctrl
 	stow --verbose --target=$$HOME --restow ulauncher
-	
 flatpak:
 	sh flatpak.sh
 
+.PHONY: $(OFFICE_PACKAGES)
 pdf:
 	$(install-yay) sioyek-appimage
 qalc:
 	$(install-pac) qalculate-gtk
 
+.PHONY: $(DEVELOP_PACKAGES)
 iriunwebcam:
 	$(install-pac) iriunwebcam-bin
 	sudo rmmod v4l2loopback; sudo modprobe v4l2loopback
