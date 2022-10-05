@@ -2,7 +2,7 @@
 
 echo "Installing noto fonts"
 PACKAGES="noto-fonts noto-fonts-emoji" # noto-fonts-cjk noto-fonts-extra"
-! pacman --query $PACKAGES && sudo pacman -Sy $PACKAGES --noconfirm
+sh ./scripts/query_install.sh pacman $PACKAGES
 
 echo "Installing Ubuntu Nerd Font"
 if [[ ! -d ~/.local/share/fonts/UbuntuMono ]]; then

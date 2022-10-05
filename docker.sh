@@ -1,6 +1,5 @@
 #!/bin/bash
-
-! pacman --query docker && sudo pacman -Sy docker --noconfirm
+sh ./scripts/query_install.sh pacman docker
 
 sudo systemctl start docker.service
 sudo systemctl enable docker.service
