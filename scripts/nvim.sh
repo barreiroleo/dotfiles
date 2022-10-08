@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PACKAGES="neovim xclip wl-clipboard npm"
+PACKAGES="neovim xclip wl-clipboard npm ripgrep-all"
 sh ./scripts/query_install.sh pacman $PACKAGES
 
 if [[ ! -d ~/.local/share/nvim/mason ]]; then

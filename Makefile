@@ -67,8 +67,11 @@ OFFICE_PACKAGES = pdf qalc
 .PHONY: $(OFFICE_PACKAGES)
 pdf:
 	$(install-yay) sioyek-appimage
+	stow --verbose --target=$$HOME --restow sioyek
 qalc:
 	$(install-pac) qalculate-gtk
+latex:
+	sh ./scripts/latex.sh
 
 
 STREAM_PACKAGES = iriunwebcam obs zoom
