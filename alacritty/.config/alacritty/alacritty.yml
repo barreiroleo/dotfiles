@@ -1,21 +1,30 @@
 font:
   normal:
-    family: UbuntuMono Nerd Font
+    family: JetBrainsMonoNL NF
     style: Regular
 
   bold:
-    family: UbuntuMono Nerd Font
+    family: JetBrainsMonoNL NF
     style: Bold
 
   italic:
-    family: UbuntuMono Nerd Font
+    family: JetBrainsMonoNL NF
     style: Italic
 
   bold_italic:
-    family: UbuntuMono Nerd Font
+    family: JetBrainsMonoNL NF
     style: Bold Italic
 
-  size: 11
+  size: 9
+
+window:
+  opacity: 1.0
 
 import:
-  - ~/.config/alacritty/Gruvbox/gruvbox_dark.yaml
+  # - ~/.config/alacritty/Gruvbox/gruvbox_dark.yaml
+  - ~/.config/alacritty/Catppuccin/catppuccin-mocha.yml
+
+colors:
+    primary:
+        background: "#11111a" # "#171717" "#11111a"
+
