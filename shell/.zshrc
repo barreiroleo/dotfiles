@@ -95,6 +95,18 @@ eval "$(_PIO_COMPLETE=zsh_source pio)"
 export KEYTIMEOUT=20
 export EDITOR=nvim
 
+# Run disown function
+# DIR=$(dirname "${BASH_SOURCE[0]}") # Relative
+function run_disown() {
+    "$@" & disown
+}
+function run_disown_silence(){
+    run_disown "$@" 1>/dev/null 2>/dev/null
+}
+# run_disown_silence java -jar $DIR/ModbusMechanic.jar
+alias plantuml="run_disown java -jar /opt/PlantUML/plantuml.jar -gui $(pwd)"
+alias plantuml_convert="java -jar /opt/PlantUML/plantuml.jar -tsvg $(pwd)/" # plantuml_convert file.md
+
 # For a full list of active aliases, run `alias`.
 alias zshconfig="nvim ~/.zshrc"
 alias ohmyzsh="nvim ~/.oh-my-zsh"
@@ -107,7 +119,8 @@ alias la='ls -la'
 alias ll='ls -lah'
 
 alias vim=nvim
-alias dvim='docker exec -it nvim nvim'
+alias dvim='docker start nvim && docker exec -it nvim nvim'
+alias dvim-create='docker run --name nvim -it alpine'
 alias dvim-clean='docker exec -it nvim rm root/.cache/nvim/ root/.local/share/nvim/ -r; sleep 0.5; dvim'
 alias dvim-sync="dvim -c 'autocmd User PackerComplete quitall' -c 'PackerSync'"
 alias dvim-comp="dvim --headless -c 'PackerCompile' -c 'quitall'"
