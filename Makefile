@@ -31,16 +31,17 @@ ulauncher: qalc
 	$(install-pac) ulauncher wmctrl
 	stow --verbose --target=$$HOME --restow ulauncher
 web:
-	$(install-yay) firefox-pwa-bin brave-bin
+	$(install-yay) firefox-pwa-bin brave-bin jdownloader2
+	$(install-pac) telegram-desktop
 
 
-DEVELOP_PACKAGES = terminal git ssh vim code docker virtualbox platformio cmake draw
+DEVELOP_PACKAGES = terminal git ssh vim code docker virtualbox platformio cmake draw lua cpp shell java rust jupyter
 .PHONY: $(DEVELOP_PACKAGES)
 terminal: fonts
 	sh ./scripts/terminal.sh
 	stow --verbose --target=$$HOME --restow kitty shell tmux
 git: dirs ssh
-	$(install-pac) lazygit
+	$(install-pac) lazygit github-cli
 	cd private && stow --verbose --target=$$HOME --restow git
 ssh: dirs
 	[ ! -d ~/.ssh/id_rsa ] && cd private && stow --verbose --target=$$HOME --restow ssh; true
@@ -61,9 +62,22 @@ cmake:
 draw:
 	$(install-yay) drawio-desktop-bin
 	$(install-pac) inkscape
+lua:
+	$(install-pac) lua luarocks
+cpp:
+	$(install-pac) clang cppcheck gdb
+shell:
+	$(install-pac) shellharden
+java:
+	$(install-pac) jdk-openjdk
+rust:
+	# curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+	$(install-pac) rustup
+	rustup default stable
+jupyter:
+	$(install-pac) jupyter-notebook python-ipykernel ipython
 
-
-OFFICE_PACKAGES = pdf qalc
+OFFICE_PACKAGES = pdf qalc latex markdown
 .PHONY: $(OFFICE_PACKAGES)
 pdf:
 	$(install-yay) sioyek-appimage
@@ -72,6 +86,9 @@ qalc:
 	$(install-pac) qalculate-gtk
 latex:
 	sh ./scripts/latex.sh
+markdown:
+	flatpak install flathub org.gnome.gitlab.somas.Apostrophe -y
+
 
 
 STREAM_PACKAGES = iriunwebcam obs zoom
@@ -86,7 +103,7 @@ zoom:
 	$(install-yay) zoom
 
 
-SYSTEM_PACKAGES = appimages flatpak hosts monitor network
+SYSTEM_PACKAGES = appimages flatpak hosts monitor network intel vpn clean
 .PHONY: $(SYSTEM_PACKAGES)
 appimages:
 	sh ./scripts/appimages.sh
@@ -97,4 +114,10 @@ hosts:
 monitor:
 	$(install-pac) bottom
 network:
-	$(install-pac) nethogs bandwhich
+	$(install-pac) nethogs bandwhich net-tools
+intel:
+	sh ./scripts/intel.sh
+vpn:
+	$(install-yay) cloudflare-warp-bin
+clean:
+	$(install-yay) bleachbit stacer-bin
