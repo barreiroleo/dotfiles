@@ -7,3 +7,5 @@ if [[ ! $FLATPACK_STATUS ]]; then
     sudo ln -s /opt/flatpak/ /var/lib/
     sudo pacman -Sy flatpak --noconfirm
 fi
+
+flatpak install flathub com.github.tchx84.Flatseal -y

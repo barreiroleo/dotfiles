@@ -2,7 +2,10 @@
 
 install_packages ()
 {
-    PACKAGES="gnome dconf-editor ghex gnome-connections gnome-mines gnome-sudoku gnome-tweaks gnome-usage sysprof gnome-browser-connector"
+    PACKAGES="gnome dconf-editor ghex gnome-connections gnome-mines gnome-sudoku gnome-tweaks gnome-usage sysprof gnome-browser-connector gnome-sound-recorder"
+    sh ./scripts/query_install.sh pacman $PACKAGES
+
+    PACKAGES="gthumb"
     sh ./scripts/query_install.sh pacman $PACKAGES
 }
 
@@ -57,3 +60,5 @@ open_terminal
 locale_dirs
 dconf_backup_settings
 dconf_restore_settings
+
+sudo firewall-cmd --permanent --zone=public --add-service=kdeconnect
