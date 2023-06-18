@@ -122,8 +122,11 @@ alias tmuxconf="nvim ~/.config/tmux/tmux.conf"
 alias nvimconf="cd ~/.config/nvim/lua/"
 
 # run_disown_silence java -jar $DIR/ModbusMechanic.jar
-alias plantuml="run_disown java -jar /opt/PlantUML/plantuml.jar -gui $(pwd)"
-alias plantuml_convert="java -jar /opt/PlantUML/plantuml.jar -tsvg $(pwd)/" # plantuml_convert file.md
+alias plantuml="java -jar ~/.local/bin/plantuml.jar"
+alias plantuml_ascii="java -jar ~/.local/bin/plantuml.jar -tutxt -progress -pipe"
+alias plantuml_md2svg="java -jar ~/.local/bin/plantuml.jar -tsvg $(pwd)/" # plantuml_convert file.md
+alias plantuml_md2asci="java -jar ~/.local/bin/plantuml.jar $(pwd)/"
+alias plantuml_gui="run_disown java -jar ~/.local/bin/plantuml.jar -gui $(pwd)"
 
 alias cat='bat'
 alias ls='lsd --group-dirs=first'
