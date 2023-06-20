@@ -36,9 +36,8 @@ PACKAGES="texlive-bin latexmk biber tectonic \
 
 sh ./scripts/query_install.sh pacman $PACKAGES
 
-
-# tllocalmgr-git: A shell and command-line utility to manage TeXLive on Arch Linux                                                                /1.4s
-sh ./scripts/query_install.sh yay tllocalmgr-git
-
-# Icon fonts
-tllocalmgr install academicons fontawesome fontawesome5
+echo "[WARN]: tllocalmgr-git not more compatible. Use tlmgr instead [provided by texlive-basic]."
+# # tllocalmgr-git: A shell and command-line utility to manage TeXLive on Arch Linux                                                                /1.4s
+# sh ./scripts/query_install.sh yay tllocalmgr-git
+# # Icon fonts
+# tllocalmgr install academicons fontawesome fontawesome5
