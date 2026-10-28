@@ -1,42 +1,82 @@
-export EDITOR="nvim"
-export MANPAGER='nvim +Man!'
-BUILDKIT_PROGRESS=tty
+has_command() {
+  command -v "$1" >/dev/null 2>&1
+}
 
-if [[ -n "$WSL_DISTRO_NAME" ]]; then
-    export BROWSER=wslview
+has_nonempty_file() {
+  [[ -f "$1" && -s "$1" ]]
+}
+
+has_directory() {
+  [[ -d "$1" ]]
+}
+
+is_executable() {
+  [[ -x "$1" ]]
+}
+
+# Include binaries locations to PATH
+export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
+
+if has_command docker; then
+  export BUILDKIT_PROGRESS=tty
 fi
 
-# Java
-if [ $(which javac) ]; then
-    export JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
+if has_command nvim; then
+    export EDITOR="nvim"
+    export MANPAGER='nvim +Man!'
+fi
+
+if [[ -n "$WSL_DISTRO_NAME" ]] && has_command wslview; then
+    export BROWSER=wslview
+elif has_command brave; then
+    export BROWSER="brave"
+fi
+
+if has_command javac; then
+    export JAVA_HOME="$(readlink -f "$(command -v javac)" | sed "s:/bin/javac::")"
 fi
 
 # NVM
-export NVM_DIR="$HOME/.nvm"
+if has_nonempty_file "$HOME/.nvm/nvm.sh"; then
+  export NVM_DIR="$HOME/.nvm"
+fi
 
 # fnm
 FNM_PATH="${HOME}/.local/share/fnm"
-if [ -d "$FNM_PATH" ]; then
+if is_executable "$FNM_PATH/fnm"; then
   export PATH="$FNM_PATH:$PATH"
-  eval "$(fnm env --use-on-cd --shell zsh)"
+  eval "$("$FNM_PATH/fnm" env --use-on-cd --shell zsh)"
 fi
 
 # Bun
-[ -s "${HOME}/.oh-my-zsh/completions/_bun" ] && source "${HOME}/.oh-my-zsh/completions/_bun"
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+if is_executable "$HOME/.bun/bin/bun"; then
+  export BUN_INSTALL="$HOME/.bun"
+  export PATH="$BUN_INSTALL/bin:$PATH"
+  has_nonempty_file "$HOME/.oh-my-zsh/completions/_bun" && source "$HOME/.oh-my-zsh/completions/_bun"
+fi
 
 # Go
-export PATH=$PATH:/usr/local/go/bin
-export PATH=$PATH:$HOME/go/bin
+if is_executable /usr/local/go/bin/go; then
+  export PATH="$PATH:/usr/local/go/bin"
+fi
+if has_directory "$HOME/go/bin"; then
+  export PATH="$PATH:$HOME/go/bin"
+fi
 
 # Cmake when manually install
 # export PATH=$PATH:/opt/cmake/cmake-3.30.3-linux-x86_64/bin/
 
 # Rust
-if [[ -d ${HOME}/.cargo/ ]]; then
+if has_nonempty_file "$HOME/.cargo/env"; then
   . "$HOME/.cargo/env"
 fi
 
 # opencode
-export PATH=$PATH:$HOME/.opencode/bin
+if is_executable "$HOME/.opencode/bin/opencode"; then
+  export PATH="$PATH:$HOME/.opencode/bin"
+fi
+if has_command plannotator; then
+  export PLANNOTATOR_PORT="19432-19463"
+  export PLANNOTATOR_REMOTE=1
+  export PLANNOTATOR_URL_HOST=auto
+fi

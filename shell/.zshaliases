@@ -9,7 +9,9 @@ alias ghostconf="nvim ~/.config/ghostty/config"
 
 alias excalidraw='docker run --rm -dit --name excalidraw -p 5000:80 excalidraw/excalidraw:latest && echo http://localhost:5000/'
 alias plantuml="java -jar ~/.local/bin/plantuml.jar"
-alias plantuml_gui="run_disown java -jar ~/.local/bin/plantuml.jar -gui $(pwd)"
+function plantuml_gui() {
+    run-disown java -jar "$HOME/.local/bin/plantuml.jar" -gui "$PWD"
+}
 alias cursor="run-disown-silence /opt/cursor/cursor.appimage --no-sandbox"
 
 if command -v lsd &> /dev/null; then
@@ -25,18 +27,13 @@ alias gcof='git branch --sort=committerdate --verbose | fzf --height=20% --rever
 alias glg='git lg'
 alias lg='lazygit'
 
-# Arch/Ubuntu specific alias
-if command -v pacman &> /dev/null; then
+if command -v bat &> /dev/null; then
     alias cat='bat'
-elif command -v apt &> /dev/null; then
+elif command -v batcat &> /dev/null; then
     alias cat='batcat'
 fi
 
-if command -v pacman &> /dev/null; then
-    alias cleanup="sudo rm -rf /var/cache/pacman/pkg/download-* ; yay -Scc && sudo dua i /"
-elif command -v apt &> /dev/null; then
-    alias cleanup="sudo apt autoclean && sudo apt autoremove && sudo dua i /"
-fi
+alias cleanup='bash "$HOME/.config/cleanup.sh"'
 
 # Nvidia graphics alias
 if command -v cardwire &> /dev/null; then

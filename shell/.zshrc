@@ -8,9 +8,6 @@
 #     tmux -u >/dev/null 2>&1 && exit
 # fi
 
-# Include binaries locations to PATH
-export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
-
 # ZSH / Oh-my-zsh configs
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
@@ -89,4 +86,3 @@ add-zsh-hook chpwd chpwd_python_hook
 # Aliases
 source $HOME/.config/fzf-custom.sh  # Run _fzf_git_list_bindings
 source $HOME/.zshaliases
-source $HOME/.zshenv

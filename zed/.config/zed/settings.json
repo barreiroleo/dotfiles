@@ -8,6 +8,9 @@
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
   // Behavior
+  "markdown_preview": {
+    "limit_content_width": false
+  },
   "preferred_line_length": 120,
   "document_symbols": "on",
   "code_lens": "menu",
@@ -41,12 +44,14 @@
   "theme": {
     "mode": "system",
     "light": "Gruvbox Material",
-    "dark": "Gruvbox Material"
+    "dark": "Vague"
   },
 
   // Layout
   "diff_view_style": "unified",
-  "git_panel": { "dock": "left" },
+  "git_panel": { "group_by": "none",
+                 "tree_view": true,
+                 "dock": "left" },
   "debugger": { "dock": "left" },
   "outline_panel": { "dock": "left" },
   "project_panel": { "git_status_indicator": true,
@@ -56,12 +61,14 @@
 
   // Agents
   "agent": {
-    "sidebar_side": "right",
     "dock": "right",
     "favorite_models": [],
     "model_parameters": []
   },
   "agent_servers": {
+    "opencode": {
+      "type": "registry"
+    },
     "OpenCode2": {
       "favorite_config_option_values": {
         "mode": [
