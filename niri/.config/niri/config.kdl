@@ -211,3 +211,4 @@ include "dms/binds.kdl"
 include "dms/windowrules.kdl"
 
 include "dms/cursor.kdl"
+include "dms/input.kdl"
