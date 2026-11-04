@@ -1,0 +1,22 @@
+# vim: set filetype=gitconfig:
+[difftool "difftastic"]
+    # See `man git-difftool` for a description of MERGED, LOCAL and REMOTE.
+    cmd = difft "$MERGED" "$LOCAL" "abcdef1" "100644" "$REMOTE" "abcdef2" "100644"
+
+# LOCAL: the head for the file(s) from the current branch on the machine that you are using.
+# REMOTE: the head for files(s) from a remote location that you are trying to merge into your LOCAL branch.
+# BASE: the common ancestor(s) of LOCAL and REMOTE.
+# MERGED: the tag / HEAD object after the merge - this is saved as a new commit.
+# These cmds are the same as native git nvimdiff but with sortcuts.
+[difftool "nvim_difftool"]
+    cmd = nvim -c 'packadd nvim.difftool' -c 'DiffTool $LOCAL $REMOTE'
+[difftool "nvimdiff_2way"]
+    cmd = "nvim -d $LOCAL $REMOTE -c 'nnoremap ZZ :wqall<CR>' -c 'nnoremap ZQ :quitall<CR>'"
+[mergetool "nvimdiff_3way"]
+    cmd = "nvim -d $LOCAL $MERGED $REMOTE \
+        -c 'nnoremap dgh :diffget 1<CR>' -c 'nnoremap dgl :diffget 3<CR>' -c 'nnoremap dp :diffput 2<CR>' \
+        -c 'nnoremap ZZ :wqall<CR>' -c 'nnoremap ZQ :quitall<CR>' -c 'wincmd w'"
+[mergetool "nvimdiff_4way"]
+    cmd = "nvim -d $LOCAL $BASE $REMOTE $MERGED \
+        -c 'nnoremap dgh :diffget 1<CR>' -c 'nnoremap dgl :diffget 3<CR>' -c 'nnoremap dp :diffput 4<CR>' \
+        -c 'nnoremap ZZ :wqall<CR>' -c 'nnoremap ZQ :quitall<CR>' -c '$wincmd w' -c 'wincmd J'"

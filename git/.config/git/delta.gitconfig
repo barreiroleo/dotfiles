@@ -1,0 +1,13 @@
+# vim: set filetype=gitconfig:
+[delta]
+    line-numbers = true
+    side-by-side = false
+    navigate = true
+    features = decorations
+    syntax-theme = Monokai Extended
+[delta "interactive"]
+    keep-plus-minus-markers = true
+[delta "decorations"]
+    commit-decoration-style = blue ol
+    commit-style = raw
+    file-style = omit

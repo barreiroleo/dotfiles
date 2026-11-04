@@ -1,0 +1,38 @@
+[user]
+    name = Leo Barreiro
+    email = a.leo.barreiro@gmail.com
+[credential]
+	helper = store
+[core]
+    editor = nvim
+    pager = delta
+[pull]
+    rebase = true
+[diff]
+    # tool = difftastic; external = difft
+    tool = nvimdiff_2way
+    guitool = nvimdiff_2way
+    algorithm = histogram
+[merge]
+    tool = nvimdiff_3way
+    conflictStyle = zdiff3
+[rebase]
+    autosquash = true
+
+[difftool]
+    prompt = true
+[mergetool]
+    prompt = true
+[pager]
+    difftool = true
+
+[format]
+    pretty = format:%C(bold red)%h %C(no-bold white)%s %C(yellow)%d %C("#505050")(%cr: %an)
+
+[interactive]
+    diffFilter = delta --color-only
+
+[include]
+    path = aliases.gitconfig
+    path = tools.gitconfig
+    path = delta.gitconfig

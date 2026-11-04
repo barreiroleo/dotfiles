@@ -19,6 +19,7 @@ function apply(){
 
 git stash
 apply shell "[ OK ] zsh, bash, profile"
+apply git "[ OK ] git"
 apply nvim "[ OK ] nvim"
 apply tmux "[ OK ] tmux"
 apply wezterm "[ OK ] wezterm"

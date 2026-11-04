@@ -1,0 +1,6 @@
+# vim: set filetype=gitconfig:
+[alias]
+    # Difftastic
+    log-difft = -c diff.external=difft log -p --ext-diff
+    show-difft = -c diff.external=difft show --ext-diff
+    diff-difft = -c diff.external=difft diff
