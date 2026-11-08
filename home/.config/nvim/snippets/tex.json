@@ -1,0 +1,53 @@
+{
+    "Figura simple": {
+        "prefix": ["figure:1c-my"],
+        "body": [
+            "\\begin{figure}[!htb]",
+            "\t\\centering",
+            "\t\\includegraphics[width=0.92\\linewidth,fbox]{${1:dir}}",
+            "\t\\caption[${2:caption}${3: shortCaption}]{${2:caption}${4: longCaption} -~\\cite{${5:cite}}}",
+            "\t\\label{fig:${6:label}}",
+            "\\end{figure}"
+        ],
+        "description": "Inserta una figura simple"
+    },
+    "Figura doble en linea": {
+        "prefix": ["figure:2hc-my"],
+        "body": [
+            "\\begin{figure}[!htb]",
+            "\t\\centering",
+            "\t\\begin{subfigure}[t]{.5\\linewidth}",
+            "\t\t\\centering",
+            "\t\t\\includegraphics[width=\\linewidth,height=6.5cm,keepaspectratio,fbox]{${1:dir}}",
+            "\t\t\\caption{${2:subcaption}}",
+            "\t\t\\label{fig:sub-${3:sublabel}}",
+            "\t\\end{subfigure}\\hfill",
+            "\t\\begin{subfigure}[t]{.5\\linewidth}",
+            "\t\t\\centering",
+            "\t\t\\includegraphics[width=\\linewidth,height=6.5cm,keepaspectratio,fbox]{${4:dir}}",
+            "\t\t\\caption{${5:subcaption}}",
+            "\t\t\\label{fig:sub-${6:sublabel}}",
+            "\t\\end{subfigure}",
+            "\t\\caption[${7:caption}${8: shortCaption}]{${7:caption}${9: longCaption} -~\\cite{${10:cite}}}",
+            "\t\\label{fig:${11:label}}",
+            "\\end{figure}"
+        ],
+        "description": "Inserta dos figuras en linea"
+    },
+    "Tabla con estilo": {
+        "prefix": ["table:my"],
+        "body": [
+            "\\begin{table}[!htb] \\centering",
+            "\t\\begin{tabular}{+l^c}",
+            "\t\t\\toprule",
+            "\t\t\\multicolumn{2}{c}{\\textbf{${1:Title}}} \\\\\\",
+            "\t\t~     & Col 1      \\\\\\ \\midrule",
+            "\t\tRow 1 & Row1-Col1  \\\\\\",
+            "\t\t\\bottomrule",
+            "\t\\end{tabular}",
+            "\t\\caption[${2:caption}${3: shortCaption}]{${2:caption}${4: longCaption}}",
+            "\t\\label{tab:${5:label}}",
+            "\\end{table}"
+        ]
+    }
+}
