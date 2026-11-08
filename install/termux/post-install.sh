@@ -9,7 +9,7 @@ echo "${USER} ALL=(ALL) ALL" >> /etc/sudoers
 
 # Install basics
 pacman -Syu
-pacman -S sudo git
+pacman -S sudo git stow
 
 # Install Xorg + I3
 sudo pacman -S --needed --noconfirm dbus i3-wm i3status dmenu xterm xorg-xrandr gtk3

@@ -1,6 +1,6 @@
 1. Download the dotfiles as zip and extract
 > wget https://github.com/barreiroleo/dotfiles/archive/refs/heads/master.zip -O master.zip
-> unzip -q master.zip dotfiles
+> unzip -q master.zip && mv dotfiles-master dotfiles
 > cd dotfiles/install/termux
 
 2. Install
