@@ -5,15 +5,20 @@
   },
   "diffs": {
     "wrap": "word",
-    "view": "auto",
-    "single": true
+    "view": "unified",
+    "single": false,
+    "fullscreen": false
   },
   "session": {
-    "sidebar": "auto",
+    "sidebar": "hide",
     "scrollbar": true,
     "thinking": "hide",
     "grouping": "auto",
-    "markdown": "rendered"
+    "markdown": "rendered",
+    "verbosity": "low",
+    "image_preview": true,
+    "tps": true,
+    "permissions": "prompt"
   },
   "animations": true,
   "debug": {
@@ -28,13 +33,20 @@
     "volume": 1
   },
   "prompt": {
-    "paste": "compact"
+    "paste": "compact",
+    "image_preview": true
   },
   "tabs": {
     "layout": "horizontal",
-    "scope": "cwd"
+    "scope": "cwd",
+    "mode": "auto",
+    "indicators": "status"
   },
   "terminal": {
     "title": true
-  }
+  },
+  "plugins": [
+    "opencode-vim@latest",
+    "~/develop/plugins/opencode-annotate"
+  ]
 }

@@ -22,20 +22,45 @@
         { "action": "shell", "resource": "pwd", "effect": "allow" }
     ],
     "plugins": [
-        "~/develop/plugins/subagent"
+        // "~/develop/plugins/subagent",
+        "@plannotator/opencode@latest"
     ],
     "mcp": {
         "servers": {
             "chrome-devtools": {
                 "type": "local",
-                "command": ["npx", "-y", "chrome-devtools-mcp@latest", "--no-usage-statistics", "--no-performance-crux", "-e", "/usr/bin/chromium"],
+                // "command": ["npx", "-y", "chrome-devtools-mcp@latest", "--no-usage-statistics", "--no-performance-crux", "-e", "/usr/bin/chromium"],
+                "command": ["npx", "-y", "chrome-devtools-mcp@latest", "--executable-path=/usr/bin/brave"],
                 "environment": {
                     "CHROME_DEVTOOLS_MCP_NO_UPDATE_CHECKS": "1"
                 }
+            },
+            "drawio": {
+              "type": "local",
+              "command": [ "npx", "-y", "@drawio/mcp" ]
+            },
+            // Needs FigCraft running with: figcraft --control 7979
+            "figcraft": {
+              "type": "local",
+              "command": ["figcraft-cli", "mcp", "--attach", "7979"]
             }
         }
     },
+    "shell": "/usr/bin/zsh",
+    "experimental": {
+        "todo": true,
+        "image_generate": {
+            // "model": "openai/gpt-image-2"
+            "model": "openai/gpt-image-2.6-sunburst"
+        }
+    },
     "providers": {
+        "openai": {
+            "models": {
+                "gpt-6-astra": { "limit": { "context": 1050000, "input": 922000, "output": 128000 } },
+                "gpt-6-luna": { "limit": { "context": 1050000, "input": 922000, "output": 128000 } }
+            }
+        },
         "ollama": {
             "package": "aisdk:@ai-sdk/openai-compatible",
             "name": "Ollama (local)",
@@ -67,6 +92,5 @@
                 }
             }
         }
-    },
-    "shell": "/usr/bin/zsh"
+    }
 }

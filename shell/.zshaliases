@@ -13,6 +13,8 @@ function plantuml_gui() {
     run-disown java -jar "$HOME/.local/bin/plantuml.jar" -gui "$PWD"
 }
 alias cursor="run-disown-silence /opt/cursor/cursor.appimage --no-sandbox"
+# Opens the control port that the opencode figcraft MCP server attaches to
+alias figcraft="run-disown-silence figcraft --control 7979"
 
 if command -v lsd &> /dev/null; then
     alias ls='lsd --color=auto --group-dirs=first -F'
@@ -24,7 +26,7 @@ alias la='ls -lhavF'
 
 # Git: checkout fuzzy, log alias
 alias gcof='git branch --sort=committerdate --verbose | fzf --height=20% --reverse --info=inline | awk '\''{print $1}'\'' | xargs --no-run-if-empty git checkout'
-alias glg='git lg'
+alias glg='git log-gph'
 alias lg='lazygit'
 
 if command -v bat &> /dev/null; then
@@ -34,6 +36,18 @@ elif command -v batcat &> /dev/null; then
 fi
 
 alias cleanup='bash "$HOME/.config/cleanup.sh"'
+
+function niri-monitor-off() {
+    local -x NIRI_SOCKET=${NIRI_SOCKET:-$(print -r -- /run/user/$UID/niri.*.sock(N[1]))}
+    niri msg action power-off-monitors
+}
+function niri-monitor-on() {
+    local -x NIRI_SOCKET=${NIRI_SOCKET:-$(print -r -- /run/user/$UID/niri.*.sock(N[1]))}
+    niri msg action power-on-monitors
+}
+function niri-monitor-blink() {
+    niri-monitor-off && niri-monitor-on
+}
 
 # Nvidia graphics alias
 if command -v cardwire &> /dev/null; then
