@@ -1,7 +1,7 @@
 1. Download the dotfiles as zip and extract
-> wget https://github.com/barreiroleo/dotfiles-wsl/archive/refs/heads/master.zip -O master.zip
+> wget https://github.com/barreiroleo/dotfiles/archive/refs/heads/master.zip -O master.zip
 > unzip -q master.zip dotfiles
-> cd dotfiles
+> cd dotfiles/install/termux
 
 2. Install
 > ./install-arch.sh

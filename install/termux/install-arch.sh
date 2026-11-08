@@ -20,7 +20,7 @@ termux-setup-storage
 echo "Post install script"
 proot-distro copy ./post-install.sh archlinux:/tmp/post-install.sh
 proot-distro login archlinux -- /tmp/post-install.sh
-DOTFILES_CMD="git clone https://github.com/barreiroleo/dotfiles-wsl.git --recursive dotfiles"
+DOTFILES_CMD="git clone https://github.com/barreiroleo/dotfiles.git dotfiles"
 proot-distro login archlinux --user ${USER} -- /bin/bash -c "${DOTFILES_CMD}"
 
 echo "Login as ${USER}"
