@@ -1,6 +1,0 @@
-[submodule "nvim/.config/nvim"]
-	path = nvim/.config/nvim
-	url = https://github.com/barreiroleo/nvim-config.git
-[submodule "tmux/.config/tmux"]
-	path = tmux/.config/tmux
-	url = https://github.com/barreiroleo/tmux-config.git
